@@ -73,4 +73,5 @@ router.post('/book/remove/:book_id/:reader_id',
     readerController.removeBookFromReader
 );
 
+export default router; 
 
