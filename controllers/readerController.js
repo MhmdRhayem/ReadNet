@@ -42,3 +42,26 @@ export const getReaderBooks = async (req, res) => {
         res.status(500).json({ message: 'Error getting reader books' });
     }
 };
+
+export const getBookDetailsApi = async (req, res) => {
+    try {
+        const { book_id, reader_id } = req.params;
+        const book = await Book.findById(book_id);
+        const genre = await Genre.findById(book.genre_id);
+        const readerBooks = await User.getReaderBooks(reader_id);
+        const isSaved = readerBooks.some(b => b.book_id === book.book_id);
+
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        res.status(200).json({
+            ...book,
+            genre_name: genre.genre_name,
+            is_saved: isSaved
+        });
+    } catch (err) {
+        console.error('Error in getBookDetailsApi:', err);
+        res.status(500).json({ message: 'Error getting book details' });
+    }
+};
