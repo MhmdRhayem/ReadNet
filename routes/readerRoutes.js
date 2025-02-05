@@ -36,3 +36,11 @@ router.get('/genres',
     authorizeRole(['reader']),
     readerController.getGenres
 );
+
+router.get('/book/:book_id/:reader_id', 
+    authenticateToken,
+    authorizeRole(['reader']),
+    verifyUser,
+    readerController.getBookDetailsApi
+);
+
