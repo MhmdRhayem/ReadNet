@@ -41,4 +41,23 @@ class Book {
             });
         });
     }
+
+    static async create(bookData) {
+        return new Promise((resolve, reject) => {
+            const { title, genre_id, published_date, author_id, bio, cover_page } = bookData;
+            let insertFields = 'title, genre_id, published_date, author_id, bio';
+            let insertValues = [title, genre_id, published_date || null, author_id, bio];
+            
+            if (cover_page) {
+                insertFields += ', cover_page';
+                insertValues.push(cover_page);
+            }
+
+            const query = `INSERT INTO Book (${insertFields}) VALUES (${insertValues.map(() => '?').join(',')})`;
+            db.query(query, insertValues, (err, result) => {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+    }
 }
