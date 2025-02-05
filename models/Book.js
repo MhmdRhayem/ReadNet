@@ -60,4 +60,24 @@ class Book {
             });
         });
     }
+
+    static async update(bookId, bookData) {
+        return new Promise((resolve, reject) => {
+            const { title, genre_idd, publication_date, description, cover_page_url } = bookData;
+            let updateFields = 'title = ?, genre_id = ?, published_date = ?, bio = ?';
+            let updateValues = [title, genre_idd, publication_date , description];
+
+            if (cover_page_url) {
+                updateFields += ', cover_page = ?';
+                updateValues.push(cover_page_url);
+            }
+
+            updateValues.push(bookId);
+            const query = `UPDATE Book SET ${updateFields} WHERE book_id = ?`;
+            db.query(query, updateValues, (err, result) => {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+    }
 }
