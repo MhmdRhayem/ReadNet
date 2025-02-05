@@ -26,4 +26,19 @@ class Book {
             });
         });
     }
+
+    static async findByReaderId(readerId) {
+        return new Promise((resolve, reject) => {
+            const query = `
+                SELECT b.* 
+                FROM Book b
+                JOIN reader_book rb ON b.book_id = rb.book_id
+                WHERE rb.reader_id = ?
+            `;
+            db.query(query, [readerId], (err, results) => {
+                if (err) reject(err);
+                resolve(results);
+            });
+        });
+    }
 }
