@@ -142,3 +142,52 @@ a:hover {
     margin-bottom: 20px;
 }
 
+.navbar {
+    background-color: #007bff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: white !important;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 5px;
+}
+
+/* Logout button specific styles */
+.nav-link.logout-btn {
+    color: white !important;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link.logout-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: translateY(-1px);
+}
+
+
+nav {
+    background-color: #007bff;
+}
+nav h3 {
+    color: white;
+}
+
