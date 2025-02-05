@@ -20,4 +20,14 @@ class Genre {
             });
         });
     }
+
+    static async create(genreName) {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO Genre (genre_name) VALUES (?)';
+            db.query(query, [genreName], (err, result) => {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+    }
 }
