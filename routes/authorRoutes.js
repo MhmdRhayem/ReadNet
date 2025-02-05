@@ -4,3 +4,5 @@ import * as authorController from '../controllers/authorController.js';
 import multer from 'multer';
 import path from 'path';
 import db from '../config/database.js';
+
+const router = express.Router();
