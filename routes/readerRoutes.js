@@ -66,3 +66,11 @@ router.post('/book/add/:book_id/:reader_id',
     readerController.addBookToReader
 );
 
+router.post('/book/remove/:book_id/:reader_id',
+    authenticateToken,
+    authorizeRole(['reader']),
+    verifyUser,
+    readerController.removeBookFromReader
+);
+
+
