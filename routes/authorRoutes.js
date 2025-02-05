@@ -57,3 +57,12 @@ router.get('/genres',
     authorizeRole(['author']),
     authorController.getGenres
 );
+
+// Book Actions
+router.post('/book/add/:author_id',
+    authenticateToken,
+    authorizeRole(['author']),
+    verifyUser,
+    upload.single('cover_page'),
+    authorController.addBook
+);
