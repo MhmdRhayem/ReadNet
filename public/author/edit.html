@@ -54,3 +54,9 @@
         const bookId = urlParams.get('book_id');
         const authorId = JSON.parse(localStorage.getItem('user')).id;
         const isEditing = !!bookId;
+
+        // Update page title based on mode
+        document.getElementById('page-title').textContent = isEditing ? 'Edit Book' : 'Add New Book';
+        document.title = isEditing ? 'Edit Book' : 'Add New Book';
+
+        
