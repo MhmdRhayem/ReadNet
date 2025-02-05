@@ -10,5 +10,14 @@ class Genre {
             });
         });
     }
-    
+
+    static async findById(genreId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Genre WHERE genre_id = ?';
+            db.query(query, [genreId], (err, results) => {
+                if (err) reject(err);
+                resolve(results[0]);
+            });
+        });
+    }
 }
