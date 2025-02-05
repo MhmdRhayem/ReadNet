@@ -75,4 +75,16 @@ class User {
             });
         });
     }
+
+    static addBookToReader(readerId, bookId) {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO reader_book (reader_id, book_id) VALUES (?, ?)';
+            db.query(query, [readerId, bookId], (err, result) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
 }
