@@ -59,3 +59,68 @@
         // Update navigation links
         document.getElementById('home-link').href = `/reader/home.html`;
         document.getElementById('saved-books-link').href = `/reader/savedbooks.html`;
+
+        // Fetch and render saved books
+        async function fetchAndRenderSavedBooks() {
+            try {
+                // Fetch saved books with authentication
+                const savedBooksResponse = await fetch(`/api/reader/${readerId}/saved-books`);
+                if (!savedBooksResponse.ok) {
+                    throw new Error('Failed to fetch saved books');
+                }
+                const booksByGenre = await savedBooksResponse.json();
+
+                // Render books by genre
+                const container = document.getElementById('books-container');
+                container.innerHTML = '';
+
+                if (Object.keys(booksByGenre).length === 0) {
+                    container.innerHTML = `
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            You haven't saved any books yet.
+                        </div>
+                    `;
+                    return;
+                }
+
+                Object.entries(booksByGenre).forEach(([genreName, genreBooks]) => {
+                    const genreSection = document.createElement('div');
+                    genreSection.className = 'genre-section mb-5';
+                    genreSection.id = `genre-${genreName}`;
+                    genreSection.innerHTML = `
+                        <h2 class="mb-3">${genreName}</h2>
+                        <div class="saved-books-list">
+                            <div class="book-cards">
+                                ${genreBooks.map(book => `
+                                    <div class="book-card" id="book-${book.book_id}">
+                                        <img src="${book.cover_page}" alt="${book.title}" class="book-image" />
+                                        <h6 class="mt-2 book-title">${book.title}</h6>
+                                        <div class="button-group">
+                                            <button class="btn btn-primary" onclick="window.viewDetails('${book.book_id}')">
+                                                Details
+                                            </button>
+                                            <button class="btn btn-danger" onclick="window.removeBook('${book.book_id}', '${genreName}')">
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(genreSection);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                const container = document.getElementById('books-container');
+                container.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        Failed to load saved books. Please try again later.
+                    </div>
+                `;
+            }
+        }
+
+        
