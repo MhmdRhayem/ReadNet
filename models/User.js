@@ -87,4 +87,17 @@ class User {
             });
         });
     }
+
+    static removeBookFromReader(readerId, bookId) {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM reader_book WHERE reader_id = ? AND book_id = ?';
+            db.query(query, [readerId, bookId], (err, result) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
+
 }
