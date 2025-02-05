@@ -87,3 +87,27 @@ export const removeBookFromReader = async (req, res) => {
         res.status(500).json({ message: 'Error removing book from reader' });
     }
 };
+
+export const getSavedBooksApi = async (req, res) => {
+    try {
+        const reader_id = req.params.reader_id;
+        const savedBooks = await Book.findByReaderId(reader_id);
+        const genres = await Genre.findAll();
+
+        // Make sure savedBooks is an array
+        const savedBooksArray = Array.isArray(savedBooks) ? savedBooks : [];
+
+        const booksByGenre = {};
+        genres.forEach(genre => {
+            const booksInGenre = savedBooksArray.filter(book => book.genre_id === genre.genre_id);
+            if (booksInGenre.length > 0) {
+                booksByGenre[genre.genre_name] = booksInGenre;
+            }
+        });
+
+        res.status(200).json(booksByGenre);
+    } catch (err) {
+        console.error('Error in getSavedBooksApi:', err);
+        res.status(500).json({ message: 'Error getting saved books' });
+    }
+};
