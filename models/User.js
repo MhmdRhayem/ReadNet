@@ -100,4 +100,15 @@ class User {
         });
     }
 
+    static getReaderBooks(readerId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT book_id FROM Book WHERE book_id IN (SELECT book_id FROM reader_book WHERE reader_id = ?)';
+            db.query(query, [readerId], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(results);
+            });
+        });
+    }
 }
