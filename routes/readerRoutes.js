@@ -44,3 +44,10 @@ router.get('/book/:book_id/:reader_id',
     readerController.getBookDetailsApi
 );
 
+router.get('/:reader_id/books',
+    authenticateToken,
+    authorizeRole(['reader']),
+    verifyUser,
+    readerController.getReaderBooks
+);
+
