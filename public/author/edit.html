@@ -105,3 +105,25 @@
             }
         }
         
+        document.getElementById('book-form').addEventListener('submit', async (e) => {
+            e.preventDefault();  
+            
+            const formData = new FormData(e.target);
+            const bookData = Object.fromEntries(formData.entries());
+            bookData['cover_page_url'] = bookData['cover_page'].name;
+            try {
+
+                const url = `/api/author/book/edit/${bookId}/${authorId}`
+                const response = await fetch(url, {
+                    method: isEditing ? 'PUT' : 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bookData)
+                });
+
+                if (response.ok) {
+                    goBack();
+                }
+            } catch (error) {
+                console.error('Error saving book:', error);
+            }
+        });
