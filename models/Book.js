@@ -80,4 +80,19 @@ class Book {
             });
         });
     }
+
+    static async delete(bookId, authorId) {
+        return new Promise((resolve, reject) => {
+            // First delete from reader_book table
+            db.query('DELETE FROM Reader_Book WHERE book_id = ?', [bookId], (err) => {
+                if (err) reject(err);
+
+                // Then delete from book table
+                db.query('DELETE FROM Book WHERE book_id = ? AND author_id = ?', [bookId, authorId], (err, result) => {
+                    if (err) reject(err);
+                    resolve(result);
+                });
+            });
+        });
+    }
 }
