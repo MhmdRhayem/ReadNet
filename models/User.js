@@ -38,4 +38,17 @@ class User {
             });
         });
     }
+
+    static createReader(readerData) {
+        return new Promise((resolve, reject) => {
+            const { name, email, password } = readerData;
+            const query = 'INSERT INTO Reader (name, email, password) VALUES (?, ?, ?)';
+            db.query(query, [name, email, password], (err, result) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
 }
