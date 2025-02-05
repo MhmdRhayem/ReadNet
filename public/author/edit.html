@@ -47,3 +47,10 @@
             </form>
         </div>
     </div>
+    <script>
+        // Get IDs from URL
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('book_id');
+        const authorId = JSON.parse(localStorage.getItem('user')).id;
+        const isEditing = !!bookId;
