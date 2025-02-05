@@ -65,4 +65,48 @@
         document.getElementById('home-link').href = `/author/home.html`;
         document.getElementById('add-book-link').href = `/author/add.html`;
     
-        
+        // Fetch and render books
+        async function fetchAndRenderBooks() {
+            try {
+                // Fetch author's books
+                const booksResponse = await fetch(`/api/author/${authorId}/books`);
+                const booksByGenre = await booksResponse.json();
+                
+
+                const container = document.getElementById('books-container');
+                container.innerHTML = '';
+
+                Object.keys(booksByGenre).forEach((genre) => {
+                    const genreBooksarr = booksByGenre[genre];
+                    genreBooksarr.forEach((genreBookss) => {
+                        const genreName = genreBookss.genre;
+                        const genreBooks = genreBookss.books;
+                        if (genreBooks.length > 0) {
+                            const genreSection = document.createElement('div');
+                            genreSection.className = 'genre-section mb-5';
+                            genreSection.id = `genre-${genreName}`;
+                            genreSection.innerHTML = `
+                                <h2 class="mb-3">${genreName}</h2>
+                                <div class="saved-books-list">
+                                    <div class="book-cards">
+                                        ${genreBooks.map(book => `
+                                            <div class="book-card" id="book-${book.book_id}">
+                                                <img src="${book.cover_page}" alt="${book.title}" class="book-image" />
+                                                <h6 class="mt-2 book-title">${book.title}</h6>
+                                                <div class="button-group">
+                                                    <button class="edit-btn btn btn-primary" onclick="editBook('${book.book_id}')">Edit</button>
+                                                    <button class="remove-btn btn btn-danger" onclick="removeBook('${book.book_id}', '${genreName}')">Remove</button>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `;
+                            container.appendChild(genreSection);
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
