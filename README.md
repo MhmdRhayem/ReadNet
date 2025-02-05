@@ -1,4 +1,4 @@
-# ReadNet
+# WeRead
 
 ## Overview
 This project is a Node.js-based API that allows authors to manage their books while enabling readers to explore books and add them to their favorites. The system includes JWT authentication to secure endpoints and ensure proper access control.
@@ -59,7 +59,7 @@ This project is a Node.js-based API that allows authors to manage their books wh
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/MhmdRhayem/ReadNet
+   git clone https://github.com/MhmdRhayem/WeRead
    ```
 
 2. **Install dependencies**
