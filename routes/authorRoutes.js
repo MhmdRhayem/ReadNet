@@ -80,3 +80,4 @@ router.post('/book/remove/:book_id/:author_id',
     authorController.removeBook
 );
 
+export default router; 
