@@ -165,3 +165,25 @@
                 alert('Error adding book. Please try again.');
             }
         });
+
+        
+        window.logout = function() {
+            localStorage.removeItem('user');
+            fetch('/api/logout', {
+                method: 'POST',
+                credentials: 'include'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/login.html';
+                } else {
+                    console.error('Logout failed');
+                }
+            })
+            .catch(error => console.error('Error during logout:', error));
+        };
+
+        loadGenres();
+    </script>
+</body>
+</html>
