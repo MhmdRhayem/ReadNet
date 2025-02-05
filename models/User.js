@@ -25,4 +25,17 @@ class User {
             });
         });
     }
+
+    static createAuthor(authorData) {
+        return new Promise((resolve, reject) => {
+            const { name, email, password } = authorData;
+            const query = 'INSERT INTO Author (name, email, password) VALUES (?, ?, ?)';
+            db.query(query, [name, email, password], (err, result) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
 }
