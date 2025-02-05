@@ -33,3 +33,11 @@ app.use('/api/reader', readerRoutes);
 app.use('/api', authRoutes);
 app.use('/api', generalRoutes);  // Mount general routes at /api
 
+// HTML Routes
+app.use('/', authRoutes);  // For login and signup pages
+app.get('/author/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'author', path.basename(req.path)));
+});
+app.get('/reader/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'reader', path.basename(req.path)));
+});
