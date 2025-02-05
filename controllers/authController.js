@@ -111,7 +111,38 @@ export const login = async (req, res) => {
                 }
             });
         }
-        
+        // Check Reader table
+        const reader = await User.findReaderByEmail(email);
+        if (!reader) {
+            return res.status(400).json({ message: 'Invalid email or password' });
+        }
+
+        const isMatch = password === reader.password; // No hashing for now
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Invalid email or password' });
+        }
+
+        const token = generateToken({
+            id: reader.reader_id,
+            email: reader.email,
+            role: 'reader'
+        });
+
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
+        res.status(200).json({
+            token,
+            user: {
+                id: reader.reader_id,
+                name: reader.name,
+                email: reader.email,
+                role: 'reader'
+            }
+        });
     } catch (err) {
         console.error('Error in login:', err);
         res.status(500).json({ message: 'Error logging in' });
