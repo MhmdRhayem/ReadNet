@@ -1,6 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mysql from "mysql2";
 import path from "path";
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
+
+// Import routes
+import authorRoutes from './routes/authorRoutes.js';
+import readerRoutes from './routes/readerRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import generalRoutes from './routes/generalRoutes.js';
