@@ -72,3 +72,11 @@ router.put('/book/edit/:book_id/:author_id',
     authorizeRole(['author']),
     authorController.updateBook
 );
+
+router.post('/book/remove/:book_id/:author_id',
+    authenticateToken,
+    authorizeRole(['author']),
+    verifyUser,
+    authorController.removeBook
+);
+
