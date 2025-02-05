@@ -31,3 +31,9 @@ router.get('/add.html',
     authorizeRole(['author']),
     authorController.getAddBookPage
 );
+
+router.get('/edit.html', 
+    authenticateToken,
+    authorizeRole(['author']),
+    authorController.getEditBookPage
+);
