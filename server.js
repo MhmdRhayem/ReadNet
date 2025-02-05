@@ -18,3 +18,7 @@ const PORT = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/cover_pages', express.static(path.join(__dirname, 'public', 'cover_pages')));
