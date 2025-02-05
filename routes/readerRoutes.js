@@ -30,3 +30,9 @@ router.get('/books',
     verifyUser,
     readerController.getReaderBooks
 );
+
+router.get('/genres',
+    authenticateToken,
+    authorizeRole(['reader']),
+    readerController.getGenres
+);
