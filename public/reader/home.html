@@ -126,4 +126,21 @@
             }
         };
 
+        window.removeBook = async function(bookId, button) {
+            try {
+                const response = await fetch(`/api/reader/book/remove/${bookId}/${readerId}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    button.textContent = 'Add';
+                    button.classList.remove('btn-danger');
+                    button.classList.add('btn-success');
+                    button.onclick = () => window.addBook(bookId, button);
+                }
+            } catch (error) {
+                console.error('Error removing book:', error);
+            }
+        };
+
         
