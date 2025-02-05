@@ -65,3 +65,14 @@ export const getBookDetailsApi = async (req, res) => {
         res.status(500).json({ message: 'Error getting book details' });
     }
 };
+
+export const addBookToReader = async (req, res) => {
+    try {
+        const { reader_id, book_id } = req.params;
+        await User.addBookToReader(reader_id, book_id);
+        res.status(200).json({ message: 'Book added successfully' });
+    } catch (err) {
+        console.error('Error in addBookToReader:', err);
+        res.status(500).json({ message: 'Error adding book to reader' });
+    }
+};
