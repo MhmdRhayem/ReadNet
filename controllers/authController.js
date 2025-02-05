@@ -46,7 +46,33 @@ export const signup = async (req, res) => {
                     role: 'author'
                 }
             });
-        } 
+        } else if (role === 'reader') {
+            // Check if email exists in Author table
+            const existingAuthor = await User.findAuthorByEmail(email);
+            if (existingAuthor) {
+                return res.status(400).json({ message: 'Email already exists' });
+            }
+
+            const reader = await User.createReader({ name, email, password: hashedPassword });
+            const token = generateToken({
+                id: reader.insertId,
+                email: email,
+                role: 'reader'
+            });
+
+            res.status(201).json({ 
+                message: 'Reader account created successfully',
+                token,
+                user: {
+                    id: reader.insertId,
+                    name: name,
+                    email: email,
+                    role: 'reader'
+                }
+            });
+        } else {
+            return res.status(400).json({ message: 'Invalid role' });
+        }
     } catch (err) {
         console.error('Error in signup:', err);
         res.status(500).json({ message: 'Error creating account' });
