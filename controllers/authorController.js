@@ -14,3 +14,7 @@ export const getAuthorHome = async (req, res) => {
 export const getAddBookPage = async (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'author', 'add.html'));
 };
+
+export const getEditBookPage = async (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'author', 'edit.html'));
+};
