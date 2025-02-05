@@ -21,4 +21,15 @@ app.use(cookieParser());
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/cover_pages', express.static(path.join(__dirname, 'public', 'cover_pages')));
+
+// Routes
+app.get('/', (req, res) => {
+    res.redirect('/login');
+});
+
+// API Routes
+app.use('/api/author', authorRoutes);
+app.use('/api/reader', readerRoutes);
+app.use('/api', authRoutes);
+app.use('/api', generalRoutes);  // Mount general routes at /api
+
