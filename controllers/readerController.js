@@ -6,3 +6,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Serve static HTML pages
+export const getReaderHome = async (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'reader', 'home.html'));
+};
