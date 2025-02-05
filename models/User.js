@@ -14,5 +14,15 @@ class User {
         });
     }
 
-    
+    static findReaderByEmail(email) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM reader WHERE email = ?';
+            db.query(query, [email], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(results[0]);
+            });
+        });
+    }
 }
