@@ -63,4 +63,16 @@ class User {
             });
         });
     }
+
+    static findReaderById(readerId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Reader WHERE reader_id = ?';
+            db.query(query, [readerId], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(results[0]);
+            });
+        });
+    }
 }
