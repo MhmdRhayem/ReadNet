@@ -191,3 +191,21 @@ nav h3 {
     color: white;
 }
 
+.logout-btn {
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    background-color: #dc3545;
+    margin-right: 10px;
+}
+.logout-btn:hover {
+    background-color: #bb2d3b;
+    transform: translateY(-1px);
+    color: white !important;
+}
+
+
