@@ -49,3 +49,13 @@ export const authorizeRole = (roles) => {
         next();
     };
 };
+
+export const verifyUser = (req, res, next) => {
+    const requestedId = parseInt(req.params.reader_id || req.params.author_id);
+    const tokenUserId = parseInt(req.user.id);
+    
+    if (requestedId !== tokenUserId) {
+        return res.status(403).json({ message: 'Unauthorized access' });
+    }
+    next();
+};
