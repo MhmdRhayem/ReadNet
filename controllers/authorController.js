@@ -71,3 +71,26 @@ export const getGenres = async (req, res) => {
         res.status(500).json({ message: 'Error getting genres' });
     }
 };
+
+export const addBook = async (req, res) => {
+    try {
+        const { title, genre_name, published_date, bio, cover_page } = req.body;
+        const author_id = req.user.id;
+        console.log(author_id)
+        const genre_id = await Genre.findIdByName(genre_name);
+        const result = await Book.create({
+            title,
+            genre_id,
+            published_date,
+            author_id,
+            cover_page,
+            bio,
+            
+        });
+
+        res.status(201).json({ message: 'Book added successfully', book_id: result.insertId });
+    } catch (err) {
+        console.error('Error in addBook:', err);
+        res.status(500).json({ message: 'Error adding book' });
+    }
+};
