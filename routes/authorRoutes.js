@@ -37,3 +37,11 @@ router.get('/edit.html',
     authorizeRole(['author']),
     authorController.getEditBookPage
 );
+
+// API Routes ('/api/author')
+router.get('/:author_id/books', 
+    authenticateToken, 
+    authorizeRole(['author']),
+    verifyUser, 
+    authorController.getAuthorBooks
+);
