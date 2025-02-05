@@ -14,3 +14,7 @@ export const getReaderHome = async (req, res) => {
 export const getBookDetails = async (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'reader', 'book.html'));
 };
+
+export const getSavedBooks = async (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'reader', 'savedbooks.html'));
+};
