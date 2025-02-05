@@ -38,3 +38,26 @@ export const getAuthorBooks = async (req, res) => {
         res.status(500).json({ message: 'Error getting author books' });
     }
 };
+
+export const getBookDetails = async (req, res) => {
+    try {
+        const { book_id } = req.params;
+        const book = await Book.findById(book_id);
+        const genre = await Genre.findById(book.genre_id);
+
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        // Combine book data with genre name
+        const bookWithGenre = {
+            ...book,
+            genre_name: genre.genre_name
+        };
+
+        res.status(200).json(bookWithGenre);
+    } catch (err) {
+        console.error('Error in getBookDetails:', err);
+        res.status(500).json({ message: 'Error getting book details' });
+    }
+};
