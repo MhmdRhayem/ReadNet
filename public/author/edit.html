@@ -131,3 +131,12 @@
         function goBack() {
             window.location.href = `/author/home.html?author_id=${authorId}`;
         }
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGenres();
+            loadBookData();
+        });
+    </script>
+</body>
+</html> 
