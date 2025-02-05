@@ -66,3 +66,9 @@ router.post('/book/add/:author_id',
     upload.single('cover_page'),
     authorController.addBook
 );
+
+router.put('/book/edit/:book_id/:author_id',
+    authenticateToken,
+    authorizeRole(['author']),
+    authorController.updateBook
+);
