@@ -110,3 +110,7 @@
                 console.error('Error fetching data:', error);
             }
         }
+
+        window.editBook = function(bookId) {
+            window.location.href = `/author/edit.html?book_id=${bookId}`;
+        }
