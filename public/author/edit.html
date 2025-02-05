@@ -127,3 +127,7 @@
                 console.error('Error saving book:', error);
             }
         });
+
+        function goBack() {
+            window.location.href = `/author/home.html?author_id=${authorId}`;
+        }
