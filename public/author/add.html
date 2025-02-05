@@ -99,3 +99,31 @@
         document.getElementById('home-link').href = `/author/home.html`;
         document.getElementById('add-book-link').href = `/author/add.html`;
         document.getElementById('cancel-link').href = `/author/home.html`;
+
+        // Load genres
+        async function loadGenres() {
+            try {
+                const response = await fetch('/api/genres');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch genres: ${response.status}`);
+                }
+                const genres = await response.json();
+                
+                const genreSelect = document.getElementById('genre');
+                genreSelect.innerHTML = '<option value="">Select a genre</option>'; // Add default option
+                
+                genres.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre.genre_name;
+                    option.textContent = genre.genre_name;
+                    genreSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading genres:', error);
+                const genreSelect = document.getElementById('genre');
+                genreSelect.innerHTML = '<option value="">Error loading genres</option>';
+                alert('Failed to load genres. Please refresh the page or try again later.');
+            }
+        }
+
+        
