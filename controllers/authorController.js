@@ -94,3 +94,29 @@ export const addBook = async (req, res) => {
         res.status(500).json({ message: 'Error adding book' });
     }
 };
+
+export const updateBook = async (req, res) => {
+    try {
+        const { book_id, author_id } = req.params;
+        const { title, genre_id, publication_date, description, cover_page_url } = req.body;
+        let genre_name = genre_id;
+        let genre_idd = await Genre.findIdByName(genre_name);    
+        const result = await Book.update(book_id, {
+            title,
+            genre_idd,
+            publication_date,
+            description,
+            author_id,
+            cover_page_url
+        });
+
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: 'Book updated successfully' });
+        } else {
+            res.status(404).json({ message: 'Book not found' });
+        }
+    } catch (err) {
+        console.error('Error in updateBook:', err);
+        res.status(500).json({ message: 'Error updating book' });
+    }
+};
