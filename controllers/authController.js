@@ -78,3 +78,42 @@ export const signup = async (req, res) => {
         res.status(500).json({ message: 'Error creating account' });
     }
 };
+
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const author = await User.findAuthorByEmail(email);
+        if (author) {
+            const isMatch = password === author.password; 
+            if (!isMatch) {
+                return res.status(400).json({ message: 'Invalid email or password' });
+            }
+
+            const token = generateToken({
+                id: author.author_id,
+                email: author.email,
+                role: 'author'
+            });
+
+            res.cookie('jwt', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production', // use secure cookies in production
+                maxAge: 24 * 60 * 60 * 1000 // 24 hours
+            });
+            
+            return res.status(200).json({
+                token,
+                user: {
+                    id: author.author_id,
+                    name: author.name,
+                    email: author.email,
+                    role: 'author'
+                }
+            });
+        }
+        
+    } catch (err) {
+        console.error('Error in login:', err);
+        res.status(500).json({ message: 'Error logging in' });
+    }
+};
