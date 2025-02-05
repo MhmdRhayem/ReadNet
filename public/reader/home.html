@@ -103,3 +103,10 @@
                 }
             }
         }
+
+        // Make functions available to onclick handlers
+        window.viewDetails = function(bookId) {
+            window.location.href = `/reader/book.html?book_id=${bookId}`;
+        };
+
+        
