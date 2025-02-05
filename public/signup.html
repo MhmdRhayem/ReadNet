@@ -37,3 +37,46 @@
         }
     </style>
 </head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-center mb-4">Library System - Signup</h1>
+
+            <form id="signup-form" class="mb-3" action="/signup" method="POST">
+                <h2 class="text-center mb-4">Create an Account</h2>
+
+                <!-- Name Field -->
+                <div class="mb-3">
+                    <label for="signup-name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="signup-name" name="name" required>
+                </div>
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="signup-email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="signup-email" name="email" required>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signup-password" name="password" required>
+                </div>
+
+                <!-- Role Field -->
+                <div class="mb-3">
+                    <label for="signup-role" class="form-label">Role</label>
+                    <select class="form-control" id="signup-role" name="role">
+                        <option value="author">Author</option>
+                        <option value="reader">Reader</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-signup">Sign Up</button>
+            </form>
+
+            <p class="text-center mt-3">Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
