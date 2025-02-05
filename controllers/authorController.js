@@ -120,3 +120,19 @@ export const updateBook = async (req, res) => {
         res.status(500).json({ message: 'Error updating book' });
     }
 };
+
+export const removeBook = async (req, res) => {
+    try {
+        const { book_id, author_id } = req.params;
+        const result = await Book.delete(book_id, author_id);
+
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: 'Book removed successfully' });
+        } else {
+            res.status(404).json({ message: 'Book not found' });
+        }
+    } catch (err) {
+        console.error('Error in removeBook:', err);
+        res.status(500).json({ message: 'Error removing book' });
+    }
+}; 
