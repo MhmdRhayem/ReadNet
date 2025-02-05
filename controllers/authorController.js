@@ -10,3 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const getAuthorHome = async (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'author', 'home.html'));
 };
+
+export const getAddBookPage = async (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'author', 'add.html'));
+};
