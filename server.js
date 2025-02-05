@@ -13,3 +13,8 @@ import generalRoutes from './routes/generalRoutes.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = 3000;
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
