@@ -61,3 +61,13 @@ export const getBookDetails = async (req, res) => {
         res.status(500).json({ message: 'Error getting book details' });
     }
 };
+
+export const getGenres = async (req, res) => {
+    try {
+        const genres = await Genre.findAll();
+        res.status(200).json(genres);
+    } catch (err) {
+        console.error('Error in getGenres:', err);
+        res.status(500).json({ message: 'Error getting genres' });
+    }
+};
