@@ -10,3 +10,9 @@ router.get('/home.html',
     authorizeRole(['reader']),
     readerController.getReaderHome
 );
+
+router.get('/book.html', 
+    authenticateToken,
+    authorizeRole(['reader']),
+    readerController.getBookDetails
+);
