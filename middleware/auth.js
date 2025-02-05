@@ -17,3 +17,26 @@ export const generateToken = (user) => {
         throw error;
     }
 };
+
+export const authenticateToken = (req, res, next) => {
+    try {
+        const token = req.cookies.jwt;
+        if (!token) {
+            console.log('No token found');
+            return res.redirect('/login');
+        }
+
+        jwt.verify(token, JWT_SECRET, (err, decoded) => {
+            if (err) {
+                console.error('Token verification error:', err);
+                return res.redirect('/login');
+            }
+            console.log("Token verified:\n",decoded)
+            req.user = decoded;
+            next();
+        });
+    } catch (error) {
+        console.error('Authentication error:', error);
+        return res.redirect('/login');
+    }
+};
