@@ -51,3 +51,9 @@ router.get('/books/:book_id',
     authorizeRole(['author']),
     authorController.getBookDetails
 );
+
+router.get('/genres',
+    authenticateToken,
+    authorizeRole(['author']),
+    authorController.getGenres
+);
