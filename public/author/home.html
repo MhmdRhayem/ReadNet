@@ -60,3 +60,9 @@
             window.location.href = '/login.html';
             throw new Error('Invalid user role or missing ID');
         }
+
+        // Update navigation links and user info
+        document.getElementById('home-link').href = `/author/home.html`;
+        document.getElementById('add-book-link').href = `/author/add.html`;
+    
+        
