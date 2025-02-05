@@ -109,4 +109,21 @@
             window.location.href = `/reader/book.html?book_id=${bookId}`;
         };
 
+        window.addBook = async function(bookId, button) {
+            try {
+                const response = await fetch(`/api/reader/book/add/${bookId}/${readerId}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    button.textContent = 'Remove';
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-danger');
+                    button.onclick = () => window.removeBook(bookId, button);
+                }
+            } catch (error) {
+                console.error('Error adding book:', error);
+            }
+        };
+
         
