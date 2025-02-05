@@ -148,3 +148,12 @@ export const login = async (req, res) => {
         res.status(500).json({ message: 'Error logging in' });
     }
 };
+
+export const logout = (req, res) => {
+    res.clearCookie('jwt', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Strict'
+    });
+    res.status(200).json({ message: 'Logged out successfully' });
+};
