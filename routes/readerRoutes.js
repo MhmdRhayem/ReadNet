@@ -16,3 +16,9 @@ router.get('/book.html',
     authorizeRole(['reader']),
     readerController.getBookDetails
 );
+
+router.get('/savedbooks.html', 
+    authenticateToken, 
+    authorizeRole(['reader']),
+    readerController.getSavedBooks
+);
