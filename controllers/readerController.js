@@ -76,3 +76,14 @@ export const addBookToReader = async (req, res) => {
         res.status(500).json({ message: 'Error adding book to reader' });
     }
 };
+
+export const removeBookFromReader = async (req, res) => {
+    try {
+        const { reader_id, book_id } = req.params;
+        await User.removeBookFromReader(reader_id, book_id);
+        res.status(200).json({ message: 'Book removed successfully' });
+    } catch (err) {
+        console.error('Error in removeBookFromReader:', err);
+        res.status(500).json({ message: 'Error removing book from reader' });
+    }
+};
