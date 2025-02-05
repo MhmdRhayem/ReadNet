@@ -22,3 +22,11 @@ router.get('/savedbooks.html',
     authorizeRole(['reader']),
     readerController.getSavedBooks
 );
+
+// API Routes ('/api/reader')
+router.get('/books', 
+    authenticateToken, 
+    authorizeRole(['reader']),
+    verifyUser,
+    readerController.getReaderBooks
+);
