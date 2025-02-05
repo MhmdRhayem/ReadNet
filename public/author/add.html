@@ -141,3 +141,27 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // Handle form submission
+        document.getElementById('add-book-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            formData.set('cover_page', `/cover_pages/${formData.get('cover_page').name}`);
+            try {
+                const response = await fetch(`/api/author/book/add/${authorId}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    window.location.href = `/author/home.html`;
+                } else {
+                    const error = await response.json();
+                    alert(error.message || 'Error adding book');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error adding book. Please try again.');
+            }
+        });
