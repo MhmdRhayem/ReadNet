@@ -32,3 +32,31 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.saved-books-list {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Allow content to grow vertically */
+    padding-left: 0px;
+}
+
+.book-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    padding-left: 0px;
+}
+
+.book-card:hover {
+    transform: scale(1.05); /* Scale the card on hover */
+}
+
+.book-title {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #333; /* Title color */
+}
