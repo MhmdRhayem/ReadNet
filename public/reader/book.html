@@ -135,4 +135,28 @@
         document.getElementById('saved-books-link').href = `/reader/savedbooks.html`;
         document.getElementById('back-button').href = `/reader/home.html`;
 
+        async function fetchAndRenderBookDetails() {
+            try {
+                const response = await fetch(`/api/reader/book/${bookId}/${readerId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch book details');
+                }
+                const book = await response.json();
+
+                document.title = `${book.title} - Book Details`;
+                console.log(book);
+                // Update DOM elements
+                document.getElementById('book-image').src = book.cover_page;
+                document.getElementById('book-image').alt = book.title;
+                document.getElementById('book-title').textContent = book.title;
+                document.getElementById('book-author').textContent = `By: ${book.author_name}`;
+                document.getElementById('book-genre').textContent = `Genre: ${book.genre_name}`;
+                document.getElementById('book-date').textContent = `Published: ${new Date(book.published_date).toLocaleDateString()}`;
+                document.getElementById('book-description').textContent = book.description || book.bio;
+
+            } catch (error) {
+                console.error('Error fetching book details:', error);
+                window.location.href = `/reader/home.html`;
+            }
+        }
         
