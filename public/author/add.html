@@ -126,4 +126,18 @@
             }
         }
 
-        
+        // Handle image preview
+        document.getElementById('cover_page').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                const preview = document.getElementById('image-preview');
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
