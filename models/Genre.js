@@ -30,4 +30,14 @@ class Genre {
             });
         });
     }
+
+    static async update(genreId, genreName) {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE Genre SET genre_name = ? WHERE genre_id = ?';
+            db.query(query, [genreName, genreId], (err, result) => {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+    }
 }
