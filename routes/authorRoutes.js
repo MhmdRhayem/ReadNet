@@ -25,3 +25,9 @@ router.get('/home.html',
     verifyUser,
     authorController.getAuthorHome
 );
+
+router.get('/add.html', 
+    authenticateToken,
+    authorizeRole(['author']),
+    authorController.getAddBookPage
+);
