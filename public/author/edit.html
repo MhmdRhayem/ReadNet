@@ -59,4 +59,20 @@
         document.getElementById('page-title').textContent = isEditing ? 'Edit Book' : 'Add New Book';
         document.title = isEditing ? 'Edit Book' : 'Add New Book';
 
-        
+        // Populate genres dropdown
+        async function loadGenres() {
+            try {
+                const response = await fetch('/api/genres');
+                const genres = await response.json();
+                const genreSelect = document.getElementById('genre');
+                
+                genres.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre.genre_name;
+                    option.textContent = genre.genre_name;
+                    genreSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading genres:', error);
+            }
+        }
