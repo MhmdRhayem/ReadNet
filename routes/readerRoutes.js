@@ -58,3 +58,11 @@ router.get('/:reader_id/saved-books',
     readerController.getSavedBooksApi
 );
 
+// Book actions
+router.post('/book/add/:book_id/:reader_id',
+    authenticateToken,
+    authorizeRole(['reader']),
+    verifyUser,
+    readerController.addBookToReader
+);
+
