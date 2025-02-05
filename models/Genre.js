@@ -40,4 +40,14 @@ class Genre {
             });
         });
     }
+
+    static async delete(genreId) {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM Genre WHERE genre_id = ?';
+            db.query(query, [genreId], (err, result) => {
+                if (err) reject(err);
+                resolve(result);
+            });
+        });
+    }
 }
