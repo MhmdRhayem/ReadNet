@@ -41,3 +41,9 @@ app.get('/author/*', (req, res) => {
 app.get('/reader/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'reader', path.basename(req.path)));
 });
+
+// Error handling for API routes
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something broke!' });
+});
