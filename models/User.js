@@ -51,4 +51,16 @@ class User {
             });
         });
     }
+
+    static findAuthorById(authorId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Author WHERE author_id = ?';
+            db.query(query, [authorId], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(results[0]);
+            });
+        });
+    }
 }
