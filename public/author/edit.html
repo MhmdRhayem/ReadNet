@@ -76,3 +76,32 @@
                 console.error('Error loading genres:', error);
             }
         }
+
+        // Load book data if editing
+        async function loadBookData() {
+            if (!isEditing) return;
+
+            try {
+                const response = await fetch(`/api/author/books/${bookId}`);
+                const book = await response.json();
+                // Populate form fields
+                document.getElementById('title').value = book.title;
+                document.getElementById('genre').value = book.genre_name;
+                document.getElementById('publication_date').value = book.published_date.split('T')[0];
+                document.getElementById('description').value = book.bio;
+
+                const fileELement = document.getElementById('cover_page'); // Example input element
+                const file = new File([''], `${book.cover_page}`, { type: 'image/jpeg' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileELement.files = dataTransfer.files;
+
+                // Show cover preview
+                const coverPreview = document.getElementById('cover-preview');
+                coverPreview.src = book.cover_page;
+                coverPreview.classList.remove('d-none');
+            } catch (error) {
+                console.error('Error loading book data:', error);
+            }
+        }
+        
