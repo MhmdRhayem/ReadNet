@@ -45,3 +45,9 @@ router.get('/:author_id/books',
     verifyUser, 
     authorController.getAuthorBooks
 );
+
+router.get('/books/:book_id',
+    authenticateToken,
+    authorizeRole(['author']),
+    authorController.getBookDetails
+);
