@@ -16,4 +16,14 @@ class Book {
             });
         });
     }
+
+    static async findByAuthorId(authorId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Book WHERE author_id = ?';
+            db.query(query, [authorId], (err, results) => {
+                if (err) reject(err);
+                resolve(results);
+            });
+        });
+    }
 }
