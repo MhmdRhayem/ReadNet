@@ -60,3 +60,63 @@ a:hover {
     margin-top: 10px;
     color: #333; /* Title color */
 }
+
+.view-details-btn {
+    padding: 8px 15px;
+    background-color: #007bff; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    align-self: flex-start; /* Align the button to the left */
+    height: 40px; /* Set a fixed height */
+    display: flex;
+    align-items: flex-start; /* Center the text vertically */
+}
+
+.add-btn, .remove-btn {
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    height: 40px; /* Set a fixed height */
+    display: flex;
+    align-items: flex-end; /* Center the text vertically */
+    width: 100px;
+}
+
+.view-details-btn {
+    background-color: #007bff; /* Button color */
+}
+
+.view-details-btn:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+
+.add-btn {
+    background-color: #28a745; /* Green color for add button */
+}
+
+.add-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.remove-btn {
+    background-color: #dc3545; /* Red color for remove button */
+}
+
+.remove-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+
+.view-details-btn:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+
+
