@@ -8,3 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const getLoginPage = (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
 };
+
+export const getSignupPage = (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'signup.html'));
+};
