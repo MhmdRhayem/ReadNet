@@ -15,3 +15,4 @@ router.get('/genres', authenticateToken, async (req, res) => {
     }
 });
 
+export default router; 
