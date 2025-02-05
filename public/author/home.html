@@ -114,3 +114,29 @@
         window.editBook = function(bookId) {
             window.location.href = `/author/edit.html?book_id=${bookId}`;
         }
+
+        window.removeBook = async function (bookId, genreName) {
+            try {
+                const response = await fetch(`/api/author/book/remove/${bookId}/${authorId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (response.ok) {
+                    // Remove the book card from the DOM
+                    const bookCard = document.getElementById(`book-${bookId}`);
+                    if (bookCard) {
+                        bookCard.remove();
+                    }
+
+                    // Check if there are any books left in this genre
+                    const genreSection = document.getElementById(`genre-${genreName}`);
+                    const remainingBooks = genreSection.querySelectorAll('.book-card');
+                    if (remainingBooks.length === 0) {
+                        genreSection.remove();
+                    }
+                }
+            } catch (error) {
+                console.error('Error removing book:', error);
+            }
+        }
